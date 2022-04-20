@@ -17,9 +17,9 @@ class MarkController extends Controller
             $mark = Mark::where('id',$request->id)->first();
         }
 
-        $students = Student::all();
-        $terms = Term::all();
-        $subjects = Subject::all();
+        $students = Student::take(3)->get();
+        $terms = Term::take(3)->get();
+        $subjects = Subject::take(3)->get();
         $marks = Mark::all();
         return view('admin.showMarks')->with(['marks'=>$marks,'mark'=>$mark,'students'=>$students,'terms'=>$terms,'subjects'=>$subjects]);
     }
@@ -49,7 +49,7 @@ class MarkController extends Controller
                 return redirect()->back()->with('message', 'Please fill all the fields');
             }
         } catch (\Exception  $e) {
-            print_R($e->getMessage()); exit;
+            // print_R($e->getMessage()); exit;
             return redirect()->back()->with('message', 'Something went wrong.');
         }
 

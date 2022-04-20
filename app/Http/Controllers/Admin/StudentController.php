@@ -18,7 +18,7 @@ class StudentController extends Controller
             $student = Student::where('id',$request->id)->first();
         }
         $students  = Student::paginate();
-        $teachers  = Teacher::all();
+        $teachers  = Teacher::take(3)->get();
         return view('admin.showStudents')->with(['students' => $students,'student'=>$student,'teachers'=>$teachers]);
     }
     public function save(Request $request){
@@ -46,7 +46,7 @@ class StudentController extends Controller
                 return redirect()->back()->with('message', 'Please fill all the fields');
             }
         } catch (\Exception  $e) {
-            print_R($e->getMessage()); exit;
+            // print_R($e->getMessage()); exit;
             return redirect()->back()->with('message', 'Something went wrong.');
         }
 
