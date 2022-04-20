@@ -59,19 +59,21 @@
                         </div>
                     </div>
                     @if($subjects)
+                    @php $k=0; @endphp
                         @foreach ($subjects as $subject)
-                        <div class=" -mx-3 mb-6">
-                            <div class="w-full px-3">
-                                <label class="flex items-center tracking-wide text-gray-700 text-base font-bold mb-2"
-                                    for="grid-last-name" required>
-                                    {{ $subject->name }}
-                                </label>
-                                <input
-                                    class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="mark" name="mark[]" type="text" placeholder="Enter  {{ $subject->name }} Mark">
-                                <input id="subject" name="subject[]" type="hidden" value="{{ $subject->id }}">
+                            <div class=" -mx-3 mb-6">
+                                <div class="w-full px-3">
+                                    <label class="flex items-center tracking-wide text-gray-700 text-base font-bold mb-2"
+                                        for="grid-last-name" required>
+                                        {{ $subject->name }}
+                                    </label>
+                                    <input
+                                        class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                        id="mark" name="mark[]" type="text" placeholder="Enter  {{ $subject->name }} Mark" @if($mark) value=" {{ json_decode($mark->mark)[$k] }}" @endif>
+                                    <input id="subject" name="subject[]" type="hidden" value="{{ $subject->id }}">
+                                </div>
                             </div>
-                        </div>
+                            @php $k++; @endphp
                         @endforeach
                     @endif
 
@@ -122,8 +124,7 @@
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Created On
                                         </th>
-                                        <th scope="col" class="relative px-6 py-3">
-                                            <span class="sr-only">Actions</span>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions
                                         </th>
                                     </tr>
                                 </thead>
@@ -161,11 +162,11 @@
                                                     <div class="text-sm text-gray-900">{{ date('M d, Y H:i a',strtotime($row->created_at)) }}</div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    <a href="{{ route('showStudents', ['id' => $row->id]) }}"
+                                                    <a href="{{ route('showMarks', ['id' => $row->id]) }}"
                                                         class="text-indigo-600 hover:text-indigo-900 mrg delete-button mr-3"
                                                         data-placement="top" data-toggle="tooltip"
                                                         data-original-title="Edit">Edit
-                                                        <a href="{{ route('deleteStudents', ['id' => $row->id]) }}"
+                                                        <a href="{{ route('deleteMarks', ['id' => $row->id]) }}"
                                                             class="text-indigo-600 hover:text-indigo-900 mrg delete-button"
                                                             data-id="{{ $row->id }}" data-placement="top"
                                                             data-toggle="tooltip" data-original-title="Delete">Delete</a>

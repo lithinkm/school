@@ -56,9 +56,9 @@ class MarkController extends Controller
     }
     public function delete($id){
         try {
-            $student = Student::find($id);
-            $student->delete();
-            return redirect()->back()->with('message', 'Student deleted successfully');
+            $mark = Mark::find($id);
+            $mark->delete();
+            return redirect()->back()->with('message', 'Mark deleted successfully');
         } catch (\Exception  $e) {
             // print_R($e->getMessage());exit;
             return redirect()->back()->with('message', 'Could not delete');
