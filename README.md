@@ -2,7 +2,7 @@
 
 The project is intended for storing student data 
 
-Steps required for installation after downloading repository
+Steps required for installation after downloading repository into your local(eg:xamp) server
 
 Step 1 (optional): **php artisan composer:update**
 
